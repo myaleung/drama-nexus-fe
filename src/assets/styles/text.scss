@@ -1,0 +1,20 @@
+h1, h2, h3 {
+  @apply font-bold text-teal-dark mt-5;
+}
+
+h1 {
+  @apply text-3xl mb-7.5;
+}
+h2 {
+  @apply text-2xl mb-6;
+}
+h3 {
+  @apply text-xl mb-5;
+}
+h4 {
+  @apply text-lg mb-5;
+}
+
+h6.subtitle{
+  @apply text-lg text-teal-dark font-bold;
+}

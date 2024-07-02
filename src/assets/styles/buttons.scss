@@ -1,0 +1,21 @@
+a {
+  @apply text-teal underline hover:text-teal-500;
+
+  &.button {
+    @apply inline-block no-underline rounded-lg bg-teal py-3 px-4 mt-2.5 text-sm text-white hover:text-white hover:bg-teal-dark transition-colors;
+  }
+
+  nav & {
+    @apply no-underline;
+  }
+}
+
+button {
+  &.button{
+    @apply inline-block no-underline rounded-lg bg-teal py-3 px-4 mt-2.5 text-sm text-white hover:text-white hover:bg-teal-dark transition-colors;
+
+    & .watchlist {
+      
+    }
+  }
+}
