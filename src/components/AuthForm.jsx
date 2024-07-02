@@ -54,6 +54,10 @@ const AuthForm = ({ path }) => {
 			};
 		}
 		const result = await submitAuthForm(body, path);
+		if (!result) {
+			errorMessages.push("Something went wrong. Please try again later.");
+			return setErrors(errorMessages);
+		}
 		switch (result.status) {
 			case 200:
 				//Logged In. Set token in cookies with 7 day expiry
