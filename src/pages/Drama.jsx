@@ -86,7 +86,7 @@ const Drama = ({ userId, token }) => {
 							</span>
 						</div>
 						<p className="pb-4 text-white">
-							Genre:
+							Genre:&nbsp;
 							{dramaGenres.map((genre, index) => {
 								return (
 									<span key={index} className="mr-1.5">

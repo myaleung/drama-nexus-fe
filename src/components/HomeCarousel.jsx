@@ -45,7 +45,15 @@ const HomeCarousel = ({homeDramas}) => {
 									</span>
 								</div>
 								<p className="pb-4 text-white">
-									Genre: {getGenres(drama.genreIds)}
+									Genre:&nbsp;
+									{getGenres(drama.genreIds).map((genre, index) => {
+										return (
+											<span key={index} className="mr-1.5">
+												{genre}
+												{index !== drama.genreIds.length - 1 && ","}
+											</span>
+										);
+									})}
 								</p>
 								<Link to={`/drama/${drama._id}`} className="button">
 									View more

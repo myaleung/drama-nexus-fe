@@ -9,6 +9,7 @@ import { getDramas } from "../services/DramaService.js";
 
 const Home = () => {
 	const [homeDramas, setHomeDramas] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const text1 =
 		"Founded in the year 2000, Drama Nexus is a boutique company dedicated to curating and cataloging Korean dramas. From the heart of Seoul, we embarked on a journey to capture the essence of Korean storytelling and share it with the world. Our passion for K-dramas drives us to meticulously gather and maintain an extensive database that includes classics that have defined the genre, as well as the latest releases that continue to captivate audiences globally.";
 	const text2 =
@@ -16,11 +17,14 @@ const Home = () => {
 
 	const renderDramas = async () => {
 		try {
+			setIsLoading(true);
 			const dramaList = await getDramas();
 			dramaList.dramas.sort((a, b) => b.year - a.year);
 			setHomeDramas(dramaList.dramas.slice(0, 10));
 		} catch (e) {
 			console.error("Failed to fetch dramas:", e.message);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -31,11 +35,25 @@ const Home = () => {
 	return (
 		<>
 			<PageTitle title="Home" />
-			<HomeCarousel homeDramas={homeDramas} />
+			{isLoading ? (
+				<div className="loader">
+					<p>Loading...</p>
+				</div>
+			) : (
+				homeDramas.length > 1 &&  <HomeCarousel homeDramas={homeDramas} />
+			)}
 			<section className="container wrapper">
 				<div className="col-span-12">
-					<h2 className="text-4xl">Top 10 Dramas</h2>
-					<Slider />
+					{isLoading ? (
+						<div className="loader">
+							<p>Loading...</p>
+						</div>
+					) : (
+						<>
+							<h2 className="text-4xl">Top 10 Dramas</h2>
+							<Slider />
+						</>
+					)}
 				</div>
 				<DoubleTextContainer title="About Us" text1={text1} text2={text2} />
 			</section>
