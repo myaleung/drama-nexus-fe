@@ -6,6 +6,7 @@ import HomeCarousel from "../components/HomeCarousel";
 import PageTitle from "../components/PageTitle";
 import Slider from "../components/Slider";
 import { getDramas } from "../services/DramaService.js";
+import LoadingStub from "../components/LoadingStub";
 
 const Home = () => {
 	const [homeDramas, setHomeDramas] = useState([]);
@@ -36,18 +37,14 @@ const Home = () => {
 		<>
 			<PageTitle title="Home" />
 			{isLoading ? (
-				<div className="loader">
-					<p>Loading...</p>
-				</div>
+				<LoadingStub />
 			) : (
-				homeDramas.length > 1 &&  <HomeCarousel homeDramas={homeDramas} />
+				homeDramas.length > 1 && <HomeCarousel homeDramas={homeDramas} />
 			)}
 			<section className="container wrapper">
 				<div className="col-span-12">
 					{isLoading ? (
-						<div className="loader">
-							<p>Loading...</p>
-						</div>
+						<LoadingStub />
 					) : (
 						<>
 							<h2 className="text-4xl">Top 10 Dramas</h2>
