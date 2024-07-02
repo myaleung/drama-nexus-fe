@@ -132,6 +132,7 @@ const Drama = ({ userId, token }) => {
 								dramaId={id}
 								dramaTitle={dramaTitle}
 								dramaPoster={dramaPoster}
+								userId={userId}
 							/>
 						</div>
 					</div>
