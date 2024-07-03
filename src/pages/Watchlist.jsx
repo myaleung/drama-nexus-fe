@@ -40,7 +40,7 @@ const Watchlist = ({ id, token }) => {
 	return (
 		<>
 			<PageTitle title="Your Watchlist" />
-			<section className="container">
+			<section className="container wrapper">
 				<div className="grid col-span-12 grid-cols-subgrid">
 					<div className="col-span-3">
 						<img

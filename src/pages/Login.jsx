@@ -19,7 +19,7 @@ const Login = () => {
 			</>
 		) : (
 			<>
-				<h4 className="font-bold mt-5">Welcome back to Drama Nexus</h4>
+				<h3 className="text-teal-dark font-bold mt-5">Welcome back to Drama Nexus</h3>
 				<ul className="list-disc space-y-1 ml-5">
 					<li>Discover shows you&apos;ll love.</li>
 					<li>
@@ -37,14 +37,14 @@ const Login = () => {
 	return (
 		<>
 			<PageTitle title={location.pathname === "/login" ? "Login" : "Sign Up"} />
-			<section className="container">
+			<section className="container wrapper">
 				<div className="col-span-12 md:col-span-7 md:order-2">
 					<h1>
 						{location.pathname === "/login" ? "Log In" : "Create Account"}
 					</h1>
 					<AuthForm path={location.pathname} />
 				</div>
-				<div className="col-span-12 md:col-span-5 md:order-1 mt-3 md:mt-0 border-t md:border-t-0 md:border-r md:border-gray-100">
+				<div className="col-span-12 md:col-span-5 md:order-1 mt-3 md:mt-0 border-t md:border-t-0 md:border-r md:border-gray-100 pr-5">
 					{content}
 				</div>
 			</section>

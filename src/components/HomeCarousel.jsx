@@ -24,7 +24,7 @@ const HomeCarousel = ({homeDramas}) => {
 							backgroundImage: `url(${dramaImageUrl().concat(drama.image)})`,
 						}}
 					>
-						<div className="container h-full min-h-80 lg:min-h-500 after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:md:bg-gradient-to-r after:md:to-80% after:from-black after:bg-opacity-20 after:h-full">
+						<div className="container wrapper h-full min-h-80 lg:min-h-500 after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:md:bg-gradient-to-r after:md:to-80% after:from-black after:bg-opacity-20 after:h-full">
 							<div className="col-span-12 p-5 z-1">
 								<h1 className="text-4xl xl:text-5xl text-white">
 									{drama.title}

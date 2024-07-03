@@ -69,7 +69,7 @@ const Drama = ({ userId, token }) => {
 				className={`Hero relative -mt-7.5 bg-cover bg-top bg-no-repeat]`}
 				style={{ backgroundImage: `url(${dramaImage})` }}
 			>
-				<div className="container min-h-80 lg:min-h-500 after:bg-slate-400 after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:md:bg-gradient-to-r after:md:to-80% after:from-black after:bg-opacity-20 after:h-full">
+				<div className="container wrapper min-h-80 lg:min-h-500 after:bg-slate-400 after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:md:bg-gradient-to-r after:md:to-80% after:from-black after:bg-opacity-20 after:h-full">
 					<div className="col-span-12 p-5 pt-24 md:pt-5 z-1">
 						<h1 className="text-white text-3xl xl:text-5xl mb-5">
 							{dramaTitle}

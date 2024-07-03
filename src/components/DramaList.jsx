@@ -8,14 +8,14 @@ const DramaList = ({ list }) => {
 		<div className="container">
 			{list.length > 0 ? (
 				list.map((drama, index) => (
-					<div key={index} className="col-span-6">
+					<div key={index} className="col-span-6 place-self-center">
 						<DramaMiniCard drama={drama} />
 					</div>
 				))
 			) : (
-					<div className="col-span-12 text-center">
-						<p>No dramas in your watchlist.</p>
-					</div>
+				<div className="col-span-12 text-center">
+					<p>No dramas in your watchlist.</p>
+				</div>
 			)}
 		</div>
 	);

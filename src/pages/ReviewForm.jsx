@@ -150,11 +150,12 @@ const ReviewForm = ({ userId, token }) => {
 										Rating
 									</Label>
 									<Select
+										id="reviewRating"
 										className="bg-white border border-gray-300 rounded-lg text-gray-dark text-sm md:text-base px-5 py-3 lg:px-4 lg:py-2 mt-1 w-full focus-visible:outline-none focus:ring-2 focus:ring-teal-600"
 										name="reviewRating"
-                    aria-label="Review Rating"
-                    value={reviewRating}
-                    onChange={(e) => setReviewRating(e.target.value)}
+										aria-label="Review Rating"
+										value={reviewRating}
+										onChange={(e) => setReviewRating(e.target.value)}
 									>
 										<option value="1">1 stars</option>
 										<option value="2">2 stars</option>
@@ -170,7 +171,7 @@ const ReviewForm = ({ userId, token }) => {
 								</Field>
 								<Field>
 									<Label
-										htmlFor="title"
+										htmlFor="reviewTitle"
 										className="text-md font-medium leading-6 text-gray-900 mb-2"
 									>
 										Title

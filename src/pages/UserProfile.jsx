@@ -56,11 +56,11 @@ const UserProfile = ({ id, token }) => {
 							Joined on {joinedDate}
 						</p>
 						<p>{bio}</p>
-						<div className="mt-3 space-x-4">
-							<Link to={`/members/${id}/watchlist`} className="button">
+						<div className="md:flex-row mt-3 space-y-4 sm:space-y-auto sm:space-x-4">
+							<Link to={`/members/${id}/watchlist`} className="button grow-0">
 								Watchlist
 							</Link>
-							<Link to={`/members/${id}/edit`} className="button">
+							<Link to={`/members/${id}/edit`} className="button grow-0">
 								Edit Profile
 							</Link>
 						</div>

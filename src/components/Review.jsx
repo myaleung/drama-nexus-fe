@@ -16,8 +16,8 @@ const Review = ({ review }) => {
 
 	return (
 		<>
-			<div className="grid grid-cols-12 col-span-12 gap-2 md:gap-5 py-7.5 first-of-type:pt-0">
-				<div className="col-span-2 self-center">
+			<div className="grid grid-cols-12 col-span-12 gap-2 md:gap-3 py-7.5 first-of-type:pt-0">
+				<div className="col-span-2 md:col-span-3 self-center justify-center">
 					{isProfilePage && (
 						<>
 							<Link to={`/drama/${review.drama._id}`}>
@@ -27,7 +27,7 @@ const Review = ({ review }) => {
 									alt={review.drama.title}
 								/>
 							</Link>
-							<p className="text-semibold text-sm lg:text-xl">{review.drama.title}</p>
+							<p className="text-semibold text-sm lg:text-base mt-1">{review.drama.title}</p>
 						</>
 					)}
 					{isDramaPage && (
@@ -38,7 +38,7 @@ const Review = ({ review }) => {
 									className="h-auto w-24 bg-grey-100"
 									alt="Drama Image"
 								/>
-								<p className="text-semibold text-sm lg:text-xl">
+								<p className="text-semibold text-sm lg:text-lg">
 									{review.author.user.name.firstName +
 										" " +
 										review.author.user.name.lastName}

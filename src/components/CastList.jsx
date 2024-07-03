@@ -1,14 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { castImageUrl } from "../utils/collectDramaImage";
 
 const CastList = ({ cast }) => {
-	const imgUrl = "https://image.tmdb.org/t/p/w300/";
+	const [visibleCast, setVisibleCast] = useState(8);
+	const showMoreCast = () => {
+		setVisibleCast((prevVisibleCast) => prevVisibleCast + 4); // Show 4 more cast members
+	};
+
 	useEffect(() => {}, [cast]);
 
 	return (
 		<>
 			<div className="container">
-				{cast.map((actor, index) => (
-					<div key={index} className="col-span-6 md:col-span-4 lg:col-span-3 flex flex-col items-center">
+				{cast.slice(0, visibleCast).map((actor, index) => (
+					<div
+						key={index}
+						className="col-span-6 md:col-span-4 lg:col-span-3 flex flex-col items-center"
+					>
 						{/* To add once actor bios are added */}
 						{/* <Link
 						to={`/actors/${actor.id}`}
@@ -16,7 +24,7 @@ const CastList = ({ cast }) => {
 					> */}
 						<img
 							className="object-cover rounded-full h-16 w-16 lg:h-24 lg:w-24 shadow border-2 border-teal-dark dark:shadow-none group-hover:border-teal-600 transition-colors"
-							src={imgUrl.concat(actor.actor.image)}
+							src={castImageUrl().concat(actor.actor.image)}
 							// src="https://0.viki.io/u/54233701u/csv5299ghQ.jpg?s=120x120&e=t&q=g&f=t"
 							alt={actor.actor.name}
 						/>
@@ -31,6 +39,17 @@ const CastList = ({ cast }) => {
 						{/* </Link> */}
 					</div>
 				))}
+				{visibleCast < cast.length && (
+					<button
+						onClick={showMoreCast}
+						className="flex flex-col items-center col-span-12 mt-4 px-4 py-2 text-teal-dark"
+					>
+						<span>Show More</span>
+						<svg className="text-teal-dark h-8 w-8">
+							<use xlinkHref="/assets/images/symbols.svg#show-more"></use>
+						</svg>
+					</button>
+				)}
 			</div>
 		</>
 	);

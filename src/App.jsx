@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 
+import About from "./pages/About";
 import Drama from "./pages/Drama";
 import Explore from "./pages/Explore";
 import Footer from "./components/Footer";
+import { getUser } from "./services/AuthUserService";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -15,7 +17,6 @@ import ReviewForm from "./pages/ReviewForm";
 import UserProfile from "./pages/UserProfile";
 import UserProfileEdit from "./pages/UserProfileEdit";
 import Watchlist from "./pages/Watchlist";
-import { getUser } from "./services/AuthUserService";
 
 const App = () => {
 	let id;
@@ -71,6 +72,7 @@ const App = () => {
 						path="/members/:id/watchlist"
 						element={<Watchlist id={id} token={token} />}
 					/>
+					<Route path="/about-us" element={<About />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Page>

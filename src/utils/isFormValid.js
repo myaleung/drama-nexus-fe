@@ -16,26 +16,28 @@ export const isFormValid = (props) => {
     }
   }
 
-  if (props.path.indexOf("members") !== -1 && props.path.indexOf("edit") !== -1) {
-    if (props.oldPassword === "") {
-      messages.push("Please enter your current password to confirm changes.");
-    }
-
-    if (props.newPassword !== "" && props.confirmPassword === "") {
-      messages.push("Please confirm your new password.");
-    }
-
-    if (props.newPassword !== props.confirmPassword) {
-      messages.push("Your new passwords aren't identical.");
-    }
-  }
-
-  if (props.path === "/login" || props.path === "/sign-up" || (props.path.indexOf("members") !== -1 && props.path.indexOf("edit") !== -1)) {
+  if (props.path === "/login" || props.path === "/sign-up") {
     if (props.emailAddress === "") {
       messages.push("Please enter your email.");
     }
     if (props.password === "") {
       messages.push("Please enter your password.");
+    }
+  }
+
+  if (/\/members\/[^\/]+\/edit/.test(props.path)) {
+    if (props.oldPassword === "") {
+      messages.push("Please enter your current password to confirm changes.");
+    }
+
+    if (props.newPassword && props.newPassword.trim() !== "") { 
+      if (props.confirmPassword.trim() === "") {
+        messages.push("Please confirm your new password.");
+      }
+    }
+
+    if (props.newPassword !== props.confirmPassword) {
+      messages.push("Your new passwords aren't identical.");
     }
   }
 
