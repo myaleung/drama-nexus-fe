@@ -20,7 +20,7 @@ const Explore = () => {
 			setDramaCards(
 				dramaList.dramas.slice(0, visibleDramas).map((element) => (
 					<div
-						className="flex flex-col col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3"
+						className="flex flex-col col-span-6 md:col-span-4 lg:col-span-3"
 						key={element.dramaId}
 					>
 						<DramaCard dramaDetails={element} />

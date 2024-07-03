@@ -13,10 +13,10 @@ const DramaCard = ({ dramaDetails }) => {
 					/>
 				</div>
 				<div className="card-body flex flex-col justify-end  h-full absolute bottom-0 p-5">
-					<h2 className="card-title mb-2 text-2xl font-bold tracking-tight text-brown-dark dark:text-white">
+					<h2 className="card-title mb-2 md:text-2xl font-bold tracking-tight text-brown-dark dark:text-white">
 						{dramaDetails.title}
 					</h2>
-					<p className="card-text mb-3 font-normal text-brown-dark dark:text-blue-light line-clamp-3">
+					<p className="card-text mb-3 font-normal text-brown-dark dark:text-blue-light hidden md:line-clamp-3">
 						{dramaDetails.synopsis}
 					</p>
 					<Link
