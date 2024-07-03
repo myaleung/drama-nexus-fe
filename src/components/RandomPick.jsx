@@ -26,7 +26,6 @@ const RandomPick = () => {
 		const shuffledDramas = shuffleArray([...dramaList]);
 		const selectedDrama = shuffledDramas[0];
     setRandomDrama(selectedDrama);
-    console.log(randomDrama.title, randomDrama.poster, randomDrama._id);
 	};
 
 	useEffect(() => {

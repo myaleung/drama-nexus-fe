@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { getUser } from "../services/AuthUserService.js";
 import Reviews from "../components/Reviews";
 import PageTitle from "../components/PageTitle";
 
-const UserProfile = ({ id, token }) => {
+const UserProfile = ({ userId, token }) => {
+	const { id } = useParams();
 	const [profilePicture, setProfilePicture] = useState("/assets/images/avatar.png");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
