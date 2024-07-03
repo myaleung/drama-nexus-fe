@@ -2,19 +2,23 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { getUser } from "../services/AuthUserService.js";
+import { loggedIn } from "../services/AuthUserService";
 import Reviews from "../components/Reviews";
 import PageTitle from "../components/PageTitle";
 
 const UserProfile = ({ userId, token }) => {
 	const { id } = useParams();
-	const [profilePicture, setProfilePicture] = useState("/assets/images/avatar.png");
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [profilePicture, setProfilePicture] = useState(
+		"/assets/images/avatar.png"
+	);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [bio, setBio] = useState("");
 	const [joinedDate, setJoinedDate] = useState("");
 	const [reviews, setReviews] = useState([]);
 
-	const handleUser = async () => {		
+	const handleUser = async () => {
 		try {
 			const response = await getUser(id, token);
 			const date = new Date(
@@ -31,8 +35,10 @@ const UserProfile = ({ userId, token }) => {
 			console.error("Failed to fetch user:", error);
 		}
 	};
-	
+
 	useEffect(() => {
+		const result = loggedIn();
+		setIsLoggedIn(result);
 		handleUser();
 	}, [id, token]);
 
@@ -56,14 +62,16 @@ const UserProfile = ({ userId, token }) => {
 							Joined on {joinedDate}
 						</p>
 						<p>{bio}</p>
-						<div className="md:flex-row mt-3 space-y-4 sm:space-y-auto sm:space-x-4">
-							<Link to={`/members/${id}/watchlist`} className="button grow-0">
-								Watchlist
-							</Link>
-							<Link to={`/members/${id}/edit`} className="button grow-0">
-								Edit Profile
-							</Link>
-						</div>
+						{isLoggedIn && (
+							<div className="md:flex-row mt-3 space-y-4 sm:space-y-auto sm:space-x-4">
+								<Link to={`/members/${id}/watchlist`} className="button grow-0">
+									Watchlist
+								</Link>
+								<Link to={`/members/${id}/edit`} className="button grow-0">
+									Edit Profile
+								</Link>
+							</div>
+						)}
 					</div>
 				</div>
 			</section>

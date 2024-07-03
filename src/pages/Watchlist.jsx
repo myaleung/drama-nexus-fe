@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import collectAvatar from "../utils/collectAvatar.js";
 import DramaList from "../components/DramaList";
 import { getUser } from "../services/AuthUserService.js";
 import PageTitle from "../components/PageTitle";
 
-const Watchlist = ({ id, token }) => {
+const Watchlist = ({ userId, token }) => {
+	const { id } = useParams();	
 	const [profilePicture, setProfilePicture] = useState(
 		"/assets/images/avatar.png"
 	);
 	const [watchlist, setWatchlist] = useState([]);
 	const fetchAvatar = async () => {
 		try {
-			const avatar = await collectAvatar(id, token);
+			const avatar = await collectAvatar(userId, token);
 			setProfilePicture(avatar);
 			return;
 		} catch (error) {
@@ -23,7 +24,7 @@ const Watchlist = ({ id, token }) => {
 
 	const handleUserWatchlist = async () => {
 		try {
-			const response = await getUser(id, token);
+			const response = await getUser(userId, token);
 			setWatchlist(response.data.userProfile.watchlist);
 			return;
 		} catch (error) {
@@ -34,7 +35,7 @@ const Watchlist = ({ id, token }) => {
 	useEffect(() => {
 		fetchAvatar();
 		handleUserWatchlist();
-	}, [id, token]);
+	}, [userId, token]);
 
 	return (
 		<>
@@ -51,7 +52,7 @@ const Watchlist = ({ id, token }) => {
 					<div className="col-span-8 col-start-5">
 						<h2 className="mt-0 pt-0">Your Watchlist</h2>
 						<div className="mt-3 space-x-4">
-							<Link to="/members/profile" className="button">
+							<Link to={`/members/profile/${id}`} className="button">
 								Back to Profile
 							</Link>
 						</div>

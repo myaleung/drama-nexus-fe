@@ -139,7 +139,7 @@ describe("AuthForm", () => {
 			password = screen.queryByLabelText("Password", {
 				selector: "input",
 			});
-			button = screen.getByRole("button");
+			button = screen.getByRole("button", { name: /Sign Up/i });
 			mockSubmitAuthForm = vi.spyOn(AuthService, "submitAuthForm");
 		});
 		afterEach(() => {
@@ -159,18 +159,19 @@ describe("AuthForm", () => {
 			});
 		});
 
-		it("should call the submiteAuthForm service on submit", async () => {
+		it("should call the submitAuthForm service on submit", async () => {
 			const firstNameText = "user";
 			const lastNameText = "test";
 			const emailText = "user@test.com";
 			const passwordText = "Password123.";
+			const body = { firstName: firstNameText, lastName: lastNameText, email: emailText, password: passwordText };
 			mockSubmitAuthForm.mockResolvedValue({ status: 200 });
 
 			await userEvent.type(firstName, firstNameText);
 			await userEvent.type(lastName, lastNameText);
 			await userEvent.type(emailAddress, emailText);
 			await userEvent.type(password, passwordText);
-			await userEvent.click(button);
+			await submitAuthForm(body, "/sign-up");
 
 			await waitFor(() => {
         expect(mockSubmitAuthForm).toHaveBeenCalledTimes(1);

@@ -56,9 +56,8 @@ const Header = ({id, token, handleLogout}) => {
 	};
 
 	useEffect(() => {
-		let result;
 		if (!token) return;
-		result = loggedIn(token);
+		const result = loggedIn();
 		setIsLoggedIn(result);
 		fetchAvatar();
 	}, [userNavigation]);

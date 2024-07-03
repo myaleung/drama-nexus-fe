@@ -1,111 +1,69 @@
-import {
-	render,
-	screen,
-	fireEvent,
-	getByRole,
-	getByText,
-	getByDisplayValue,
-	waitFor,
-} from "@testing-library/react";
+import axios from "axios";
+import { waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Route, Routes, MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-// import AuthForm from "../../src/components/AuthForm.jsx";
-import * as AuthService from "../../src/services/AuthFormService.js";
-import { submitAuthForm } from "../../src/services/AuthFormService.js";
-import Login from "../../src/pages/Login.jsx";
+import * as AuthUserService from "../../src/services/AuthUserService.js";
+import { getUser } from "../../src/services/AuthUserService.js";
+import userProfile from "../../../backend/src/models/UserProfile.model.js";
 
-describe.skip("AuthForm", () => {
-	describe("Login Page", () => {
-		let mockSubmitAuthForm;
-		let emailAddress;
-		let password;
-		let button;
+describe("Auth User Service", () => {
+	describe("Get user", async () => {
+		let mockError;
+		let mockResponse;
+		let mockUserId;
+		let mockGetUser;
 		const mockJwtToken = "mock.jwt.token";
 		beforeEach(async () => {
-			await waitFor(() => {
-				render(
-					<MemoryRouter initialEntries={["/login"]}>
-						<Routes>
-							<Route path="/login" element={<Login />} />
-						</Routes>
-					</MemoryRouter>
-				);
-			});
-			emailAddress = screen.queryByLabelText("Email", {
-				selector: "input",
-			});
-			password = screen.queryByLabelText("Password", {
-				selector: "input",
-			});
-			button = screen.getByRole("button");
-			mockSubmitAuthForm = vi.spyOn(AuthService, "submitAuthForm");
-			document.cookie = `token=${mockJwtToken}`;
+			mockResponse = {
+				userProfile: {
+					_id: "12345",
+					user: "9876a",
+					profilePicture: "image.jpg",
+					bio: "Hi my name is Amy",
+					watchlist: [],
+					reviews: [],
+				},
+				status: 200,
+			};
+			mockError = {
+				response: {
+					data: {
+						message: "User not found",
+					},
+					status: 404,
+				},
+			};
+			vi.mock('axios');
+			mockGetUser = vi.spyOn(AuthUserService, "getUser");
 		});
 		afterEach(() => {
 			vi.clearAllMocks();
-			mockSubmitAuthForm.mockClear();
-			document.cookie = "token=; Max-Age=0";
+			mockResponse = null;
 		});
 
-		it("should render the login form on /login path", async () => {
-			expect(screen.getByText("Login")).toBeInTheDocument();
-			expect(emailAddress).toBeInTheDocument();
-			expect(password).toBeInTheDocument();
-			expect(button).toBeInTheDocument();
+		it("should return a user profile on send", async () => {
+			mockUserId = "12345";
+			axios.get.mockResolvedValue(mockResponse);
+
+			const response = await getUser(mockUserId, mockJwtToken);
 			await waitFor(() => {
-				expect(button).toHaveTextContent("Login");
+				expect(response).toEqual(mockResponse);
 			});
 		});
+		
+		it("should handle error when the request fails", async () => {
+			mockUserId = "nonexistent";
+			mockGetUser.mockRejectedValue(mockError);
 
-		it("should submit the login form", async () => {
-			const emailText = "user@test.com";
-			const passwordText = "Password123.";
-			const body = { email: emailText, password: passwordText };
-			mockSubmitAuthForm.mockResolvedValue({ status: 200 });
-
-			await userEvent.type(emailAddress, emailText);
-			await userEvent.type(password, passwordText);
-			await userEvent.click(button);
-
-			await waitFor(() => {
-				expect(mockSubmitAuthForm).toHaveBeenCalledTimes(1);
-				expect(mockSubmitAuthForm).toHaveBeenCalledWith(body, "/login");
-			});
-		});
-
-		it("should handle the form submission correctly and return success", async () => {
-			const emailText = "user@test.com";
-			const passwordText = "Password123.";
-			const body = { email: emailText, password: passwordText };
-			mockSubmitAuthForm.mockResolvedValue({
-				status: 200,
-				token: mockJwtToken,
-			});
-
-			await userEvent.type(emailAddress, "email@email.com");
-			await userEvent.type(password, "Password123.");
-
-			const response = await submitAuthForm(body, "/login");
-
-			expect(response.status).toBe(200);
-		});
-
-		it("should respond with 500 if Auth Service rejects", async () => {
-			const errorResponse = new Error("Please enter a valid email address");
-			errorResponse.status = 500;
-			mockSubmitAuthForm.mockRejectedValue(errorResponse);
-			const body = { email: emailAddress, password: password };
-			userEvent.type(emailAddress, "email@email");
-			userEvent.type(password, " ");
-
+			await expect(getUser(mockUserId, mockJwtToken)).rejects.toEqual(mockError);
 			try {
-				await submitAuthForm(body, "/login");
+				await getUser(mockUserId, mockJwtToken);
 			} catch (e) {
-				expect(e.message).toBe("Please enter a valid email address");
-				expect(e.status).toBe(500);
-				expect(mockSubmitAuthForm).toHaveBeenCalledTimes(1);
+				expect(e.response.data.message).toBe(mockError.response.data.message);
+				expect(e.response.status).toBe(404);
+				expect(mockGetUser).toHaveBeenCalledTimes(2);
 			}
 		});
 	});

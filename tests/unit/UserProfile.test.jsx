@@ -13,11 +13,12 @@ describe("User Profile Tests", () => {
 		let mockUserService;
 		let mockId;
 		let mockJwtToken;
-
+		let editProfileButton;
+		vi.mock("../../src/services/AuthUserService.js");
 		beforeEach(async () => {
+			AuthUserService.loggedIn.mockReturnValue(true);
 			mockId = "123";
 			mockJwtToken = "mock.jwt.token";
-			mockUserService = vi.spyOn(AuthUserService, "getUser");
 			await waitFor(() => {
 				render(
 					<MemoryRouter initialEntries={[`/members/${mockId}`]}>
@@ -25,11 +26,14 @@ describe("User Profile Tests", () => {
 							<Route
 								path="/members/:id"
 								element={<UserProfile id={mockId} token={mockJwtToken} />}
-							/>
+								/>
 						</Routes>
 					</MemoryRouter>
 				);
 			});
+			mockUserService = vi.spyOn(AuthUserService, "getUser");
+			editProfileButton = await screen.findByText(/edit profile/i);
+			vi.mock("../../src/services/AuthUserService.js");
 		});
 		afterEach(() => {
 			vi.clearAllMocks();
@@ -113,8 +117,9 @@ describe("User Profile Tests", () => {
 			expect(result.data.reviews).toEqual(user.reviews);
     });
     
-    it("should have an 'Edit Profile' button", async () => { 
-      const editProfileButton = screen.getByText(/edit profile/i);
+		it("should have an 'Edit Profile' button", async () => { 
+			AuthUserService.loggedIn.mockReturnValue(true);
+      const editProfileButton = await screen.findByText(/edit profile/i);
       expect(editProfileButton).toBeInTheDocument();
     });
 	});

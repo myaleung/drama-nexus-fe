@@ -33,7 +33,8 @@ export const isTokenExpired = (token) => {
   }
 };
 
-export const loggedIn = (token) => {
+export const loggedIn = () => {
+  const token = Cookies.get("token");
   if (!token) {
     return false;
   }
