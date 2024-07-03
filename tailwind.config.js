@@ -45,6 +45,9 @@ export default {
           dark: '#963E63',
         },
       },
+      height: {
+        '75': '18.75rem',
+      },
       margin: {
         '2.5': '0.625rem',
         '7.5': '1.875rem',

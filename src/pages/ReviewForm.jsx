@@ -208,7 +208,7 @@ const ReviewForm = ({ userId, token }) => {
 									className="button rounded-lg bg-teal py-3 px-4 mt-2.5 text-sm text-white data-[hover]:bg-teal-500 data-[active]:bg-teal-700"
 									tabIndex={3}
 								>
-									{location.pathname === "/add-review"
+									{location.pathname.endsWith("/add-review")
 										? "Submit Review"
 										: "Edit Review"}
 								</Button>

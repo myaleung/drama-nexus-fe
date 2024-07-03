@@ -17,7 +17,7 @@ const Review = ({ review }) => {
 	return (
 		<>
 			<div className="grid grid-cols-12 col-span-12 gap-2 md:gap-3 py-7.5 first-of-type:pt-0">
-				<div className="col-span-2 md:col-span-3 self-center justify-center">
+				<div className="col-span-2 md:col-span-3 self-start">
 					{isProfilePage && (
 						<>
 							<Link to={`/drama/${review.drama._id}`}>
