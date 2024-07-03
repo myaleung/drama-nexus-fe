@@ -31,7 +31,7 @@ const Reviews = ({ dramaReviews, dramaId, dramaTitle, dramaPoster, userId }) => 
 				))
 			) : (
 				<div className="col-span-12 text-center mt-2.5">
-					<p>No reviews. Be the first to add one.</p>
+					<p>No reviews.</p>
 				</div>
 			)}
 		</div>
