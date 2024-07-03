@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import DoubleTextContainer from "../components/DoubleTextContainer";
-import DramaCard from "../components/DramaCard";
+import { getDramas } from "../services/DramaService.js";
 import HomeCarousel from "../components/HomeCarousel";
+import LoadingStub from "../components/LoadingStub";
 import PageTitle from "../components/PageTitle";
 import Slider from "../components/Slider";
-import { getDramas } from "../services/DramaService.js";
-import LoadingStub from "../components/LoadingStub";
+import RandomPick from "../components/RandomPick.jsx";
 
 const Home = () => {
 	const [homeDramas, setHomeDramas] = useState([]);
@@ -39,7 +39,11 @@ const Home = () => {
 			{isLoading ? (
 				<LoadingStub />
 			) : (
-				homeDramas.length > 1 && <HomeCarousel homeDramas={homeDramas} />
+				homeDramas.length > 1 && (
+					<>
+						<HomeCarousel homeDramas={homeDramas} />
+					</>
+				)
 			)}
 			<section className="container wrapper">
 				<div className="col-span-12">
@@ -52,6 +56,9 @@ const Home = () => {
 						</>
 					)}
 				</div>
+			</section>
+			<RandomPick />
+			<section className="container wrapper">
 				<DoubleTextContainer title="About Us" text1={text1} text2={text2} />
 			</section>
 		</>

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import collectAvatar from "../utils/collectAvatar.js";
-import PageTitle from "../components/PageTitle";
-import Reviews from "../components/Reviews";
 import { getUser } from "../services/AuthUserService.js";
+import Reviews from "../components/Reviews";
+import PageTitle from "../components/PageTitle";
 
 const UserProfile = ({ id, token }) => {
 	const [profilePicture, setProfilePicture] = useState("/assets/images/avatar.png");

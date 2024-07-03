@@ -61,7 +61,7 @@ const AuthForm = ({ path }) => {
 		switch (result.status) {
 			case 200:
 				//Logged In. Set token in cookies with 7 day expiry
-				Cookies.set("token", `${result.data?.token}`, { expires: 7 });
+				Cookies.set("token", `${result.data?.token}`, { expires: 7, SameSite: "None", Secure: true });
 				localStorage.setItem("user", JSON.stringify(result.data));
 				setErrors("");
 				//redirect to home page

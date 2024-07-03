@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import PageTitle from "../components/PageTitle";
 import DramaCard from "../components/DramaCard";
 import { getDramas } from "../services/DramaService.js";
+import PageTitle from "../components/PageTitle";
 import { useEffect } from "react";
 
 const Explore = () => {

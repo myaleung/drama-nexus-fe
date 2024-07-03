@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
 import CastList from "../components/CastList";
-import PageTitle from "../components/PageTitle";
+import { dramaImageUrl } from "../utils/collectDramaImage.js";
 import { getDrama } from "../services/DramaService";
 import { getGenres } from "../utils/getGenres";
+import PageTitle from "../components/PageTitle";
+import { posterImageUrl } from "../utils/collectDramaImage.js";
 import { ratingColour } from "../utils/ratingColour";
 import Reviews from "../components/Reviews";
 import { updateWatchlist } from "../services/WatchlistService";
 import { updateLocalWatchlist } from "../utils/updateLocalWatchlist";
-import { dramaImageUrl } from "../utils/collectDramaImage.js";
-import { posterImageUrl } from "../utils/collectDramaImage.js";
 
 const Drama = ({ userId, token }) => {
 	const { id } = useParams();
@@ -57,7 +57,6 @@ const Drama = ({ userId, token }) => {
 			console.error("Failed to fetch drama:", e.message);
 		}
 	};
-
 	useEffect(() => {
 		getDetails();
 	}, [id, onWatchlist]);
@@ -66,14 +65,12 @@ const Drama = ({ userId, token }) => {
 		<>
 			<PageTitle title="Drama" />
 			<div
-				className={`Hero relative -mt-7.5 bg-cover bg-top bg-no-repeat]`}
+				className={`hero relative bg-blue-light bg-cover bg-top bg-no-repeat -mt-7.5`}
 				style={{ backgroundImage: `url(${dramaImage})` }}
 			>
-				<div className="container wrapper min-h-80 lg:min-h-500 after:bg-slate-400 after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:md:bg-gradient-to-r after:md:to-80% after:from-black after:bg-opacity-20 after:h-full">
+				<div className="container wrapper h-full min-h-80 lg:min-h-500 after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:md:bg-gradient-to-r after:md:to-80% after:from-black after:bg-opacity-20 after:h-full">
 					<div className="col-span-12 p-5 pt-24 md:pt-5 z-1">
-						<h1 className="text-white text-3xl xl:text-5xl mb-5">
-							{dramaTitle}
-						</h1>
+						<h1 className="text-4xl xl:text-5xl text-white">{dramaTitle}</h1>
 						<div className="flex items-center gap-x-3 text-white">
 							<p>{dramaYear}</p>
 							<span className="flex items-center gap-x-1">

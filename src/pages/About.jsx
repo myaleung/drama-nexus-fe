@@ -11,7 +11,7 @@ const About = () => {
 		<>
 			<PageTitle title="About" />
 			<div
-				className={`Hero relative -mt-7.5 bg-slate-400 bg-cover bg-bottom bg-no-repeat`}
+				className={`hero relative -mt-7.5 bg-slate-400 bg-cover bg-bottom bg-no-repeat`}
 				style={{
 					backgroundImage: `url("/assets/images/clouds.jpg")`,
 				}}

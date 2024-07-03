@@ -5,9 +5,9 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { ratingColour } from "../utils/ratingColour";
-import { getGenres } from "../utils/getGenres";
 import { dramaImageUrl } from "../utils/collectDramaImage.js";
+import { getGenres } from "../utils/getGenres";
+import { ratingColour } from "../utils/ratingColour";
 
 const HomeCarousel = ({homeDramas}) => {
 	const [dramaHero, setDramaHero] = useState([]);
@@ -19,7 +19,7 @@ const HomeCarousel = ({homeDramas}) => {
 					className="min-h-52 lg:min-h-80 xl:min-h-650 h-auto"
 				>
 					<div
-						className={`Hero h-full relative bg-blue-light bg-cover bg-center bg-no-repeat]`}
+						className={`hero h-full relative bg-blue-light bg-cover bg-center bg-no-repeat]`}
 						style={{
 							backgroundImage: `url(${dramaImageUrl().concat(drama.image)})`,
 						}}

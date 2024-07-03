@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import collectAvatar from "../utils/collectAvatar.js";
 import DramaList from "../components/DramaList";
 import { getUser } from "../services/AuthUserService.js";
-import { getDrama } from "../services/DramaService.js";
 import PageTitle from "../components/PageTitle";
 
 const Watchlist = ({ id, token }) => {

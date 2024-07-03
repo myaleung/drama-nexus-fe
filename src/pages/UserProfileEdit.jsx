@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Field, Input, Label, Textarea } from "@headlessui/react";
-import PageTitle from "../components/PageTitle";
 import { isFormValid } from "../utils/isFormValid";
+import PageTitle from "../components/PageTitle";
 import { submitProfileUpdate } from "../services/AuthFormService";
 
 const UserProfileEdit = ({ id, token }) => {
