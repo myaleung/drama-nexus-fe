@@ -10,6 +10,7 @@ import RandomPick from "../components/RandomPick.jsx";
 
 const Home = () => {
 	const [homeDramas, setHomeDramas] = useState([]);
+	const [dramasPan, setDramasPan] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const text1 =
 		"Founded in the year 2000, Drama Nexus is a boutique company dedicated to curating and cataloging Korean dramas. From the heart of Seoul, we embarked on a journey to capture the essence of Korean storytelling and share it with the world. Our passion for K-dramas drives us to meticulously gather and maintain an extensive database that includes classics that have defined the genre, as well as the latest releases that continue to captivate audiences globally.";
@@ -20,6 +21,7 @@ const Home = () => {
 		try {
 			setIsLoading(true);
 			const dramaList = await getDramas();
+			setDramasPan(dramaList.dramas);
 			dramaList.dramas.sort((a, b) => b.year - a.year);
 			setHomeDramas(dramaList.dramas.slice(0, 10));
 		} catch (e) {
@@ -52,12 +54,12 @@ const Home = () => {
 					) : (
 						<>
 							<h2 className="text-4xl">Top 10 Dramas</h2>
-							<Slider />
+							<Slider dramas={dramasPan} />
 						</>
 					)}
 				</div>
 			</section>
-			<RandomPick dramas={homeDramas} />
+			<RandomPick dramas={dramasPan} />
 			<section className="container wrapper">
 				<DoubleTextContainer title="About Us" text1={text1} text2={text2} />
 			</section>

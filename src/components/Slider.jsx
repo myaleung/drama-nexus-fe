@@ -7,16 +7,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import DramaCard from "../components/DramaCard";
-import { getDramas } from "../services/DramaService.js";
 
-const Slider = () => {
+const Slider = ({ dramas }) => {
 	const [dramaCards, setDramaCards] = useState([]);
 
 	useEffect(() => {
 		const renderDramas = async () => {
 			try {
-				const dramaList = await getDramas();
-				dramaList.dramas.sort((a, b) => b.voteAverage - a.voteAverage);
+				dramas.sort((a, b) => b.voteAverage - a.voteAverage);
 				setDramaCards(
 					dramaList.dramas.slice(0, 10).map((element) => (
 						<SwiperSlide key={element.dramaId}>
