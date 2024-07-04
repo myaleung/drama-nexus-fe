@@ -282,6 +282,17 @@ See Miro Board: https://miro.com/app/board/uXjVK7AloW4=/?moveToWidget=3458764592
 #### PUT Drama Title
 ![PUT Drama Title](images/put-drama-title.png)
 
+## Hierachy
+I used my Miro board to produce a hierachy diagram of my site to help visualise useStates and props within my React App. There ended up being a lot of state variables required and props passed due to my child components requiring the data. A lot of my components used the same/similar data and thus I ended up moving user/userprofile date to the main app. Components could therefore access the id of the user where needed.
+![Mindmap and web hierachy](images/mindmap-hierachy.png)  
+![Homepage](images/homepage.png)  
+![Explore Page](images/explorepage.png)  
+![Drama Page](images/dramapage.png)  
+![Profile Page](images/profilepage.png)  
+![Watchlist Page](images/watchlistpage.png)  
+![Login Page](images/login.png)
+![Sign Up](images/signup.png)
+
 ## Gen AI
 With the help of generative AI, I had asked if there were any user stories I missed or edge cases I should be aware of to make sure I covered the majority of possible user stories I'd need for the project. If time permits, I will try to incorporate these features such as the 'forgot password' functionality.
 ![edge cases](images/edge-cases.png)

@@ -31,48 +31,24 @@ By promoting a space for cultural exchange, Drama Nexus allows users from differ
 - **Scalability:** To be able to scale the site for future traffic flow, cloud-based services that can dynamically scale resources based on demand may need to be implemented which would cause financial costs and technical debt.
 - **Platform Reputation:** Poor handling of user data and community issues could damage the platform’s reputation, making it harder to attract new users. This can be mitigated by implementing user-friendly design and continuously gather user feedback for improvements.
 
-## Conclusion
-<!-- What I would also have done better/extra -->
-I felt that I was over ambitious due to the short timeframe I had to accomplish the proposal I set out to do. However, I quickly prioritised tickets into features (colour coded) and started working on the important features first.
-
-Due to the sheer size of information the database holds, multiple queries did need to be made to it. I felt I should have cached the drama query results to session storage or local storage to help save server load. Although this wasn't realistic and a working site would normally query the database normally. 
-I should return the database result in pages and query a set number of pages, especially for the homepage as this wouldn't have needed the full extent of the database.
-
-Testing the application was hard to be done automatically as the way I needed my response to return data was specific and was hard to mock the implementation due to my lack of knowledge.
-
-If I was given more time, I would have liked to include the following features:
-### Genre Listings and Search Bar
-A dropdown menu of genres linked to page collections of dramas that match. This would allow users to browse different categories based on their tastes. A search bar hosted on the header would have also been helpful in terms of locating a particular drama or titles that matched the query.
-
-### Admin Role
-In my proposal, I stated that an admin role would be included. However, due to time constraints this was not implemented; although some of the admin routes and features had been started and added to the platform, they've been put as placeholder until the role has been actioned. Such as adding new dramas and editing information.
-Further to the admin role, I'd like to include a '#moderator' role who would monitor and sanction reviews added by users to make sure they were appropriate. 
-
-Further features for the application include:
-### Actor Bio Pages
-Similar to user profiles, actors would have their own bio page which includes information about then and the dramas they're casted in.
-
-### Personalised Recommendations
-After collecting data based on user preferences, what they've reviewed, what they're watchlisting. This data can be used to help recommend members with new titles and drama series they may potentially love.
-
-### Expansion into other Asian dramas
-Expand the database to include other types of asian dramas for members to discuss and browse freely.
-
 ## Setup
 `npm i`
 **Frontend**
-`cd frontend/`
 `npm run dev`
-**Backend**
-`cd backend/`
-`npm run start`     - Start up server
+
+## Client Access
+https://drama-nexus.netlify.app/
 
 ## Technologies
 
 Built with
 - React
-- MongoDB
-- Express
 - Tailwind
 - Material-Tailwind
 - HeadlessUI
+- Swiper
+- TMBD API
+
+### Attributions
+Images and vector graphics from Freepik
+Drama information from TMDB
