@@ -16,7 +16,7 @@ const Slider = ({ dramas }) => {
 			try {
 				dramas.sort((a, b) => b.voteAverage - a.voteAverage);
 				setDramaCards(
-					dramaList.dramas.slice(0, 10).map((element) => (
+					dramas.slice(0, 10).map((element) => (
 						<SwiperSlide key={element.dramaId}>
 							<DramaCard dramaDetails={element} />
 						</SwiperSlide>

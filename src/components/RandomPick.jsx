@@ -4,22 +4,17 @@ import { posterImageUrl } from "../utils/collectDramaImage.js";
 import { shuffleArray } from "../utils/shuffleArray.js";
 
 const RandomPick = ({ dramas }) => {
-	const [dramaList, setDramaList] = useState([]);
 	const [randomDrama, setRandomDrama] = useState({});
 
 	const handleRandomPick = () => {
-		const shuffledDramas = shuffleArray([...dramaList]);
+		const shuffledDramas = shuffleArray(dramas);
 		const selectedDrama = shuffledDramas[0];
 		setRandomDrama(selectedDrama);
 	};
 
-	useEffect(() => {
-		setDramaList(dramas);
-	}, []);
-
 	return (
 		<>
-			{dramaList.length > 5 && (
+			{dramas.length > 5 && (
 				<div
 					className={`relative bg-blue-light bg-cover bg-top bg-no-repeat text-center mt-7.5 mb-5`}
 					style={{ backgroundImage: `url("/assets/images/clouds.jpg")` }}
