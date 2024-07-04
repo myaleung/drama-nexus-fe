@@ -9,25 +9,82 @@ import "swiper/css/effect-fade";
 import DramaCard from "../components/DramaCard";
 
 const Slider = ({ dramas }) => {
+	const cacheDuration = 24 * 60 * 60 * 1000; //24hrs in milliseconds
 	const [dramaCards, setDramaCards] = useState([]);
 
-	useEffect(() => {
-		const renderDramas = async () => {
-			try {
-				dramas.sort((a, b) => b.voteAverage - a.voteAverage);
-				setDramaCards(
-					dramas.slice(0, 10).map((element) => (
-						<SwiperSlide key={element.dramaId}>
-							<DramaCard dramaDetails={element} />
-						</SwiperSlide>
-					))
-				);
-			} catch (e) {
-				console.error("Failed to fetch dramas:", e.message);
-			}
-		};
-		renderDramas();
-	}, []);
+
+	// useEffect(() => {
+	// 	const renderDramas = async () => {
+	// 		try {
+	// 			dramas.sort((a, b) => b.voteAverage - a.voteAverage);
+	// 			setDramaCards(
+	// 				dramas.slice(0, 10).map((element) => (
+	// 					<SwiperSlide key={element.dramaId}>
+	// 						<DramaCard dramaDetails={element} />
+	// 					</SwiperSlide>
+	// 				))
+	// 			);
+	// 		} catch (e) {
+	// 			console.error("Failed to fetch dramas:", e.message);
+	// 		}
+	// 	};
+	// 	renderDramas();
+	// }, []);
+	 useEffect(() => {
+		 const fetchAndRenderDramas = async () => {
+			 const cachedDramas = localStorage.getItem("dramasCache");
+			 const cacheTime = localStorage.getItem("cacheTime");
+
+			 if (
+				 cachedDramas &&
+				 cacheTime &&
+				 new Date().getTime() - cacheTime < cacheDuration
+			 ) {
+				 try {
+					 const dramasData = JSON.parse(cachedDramas);
+					 if (Array.isArray(dramasData) && dramasData.length > 0) {
+						 setDramaCards(
+							 dramasData.slice(0, 10).map((element) => (
+								 <SwiperSlide key={element.dramaId}>
+									 <DramaCard dramaDetails={element} />
+								 </SwiperSlide>
+							 ))
+						 );
+					 } else {
+						 console.log(
+							 "Cached data is empty or not an array, fetching new data."
+						 );
+						 fetchDramasFromServer();
+					 }
+				 } catch (e) {
+					 console.error("Error parsing cached dramas:", error);
+					 localStorage.removeItem("dramasCache");
+					 localStorage.removeItem("cacheTime");
+					 fetchDramasFromServer();
+				 }
+			 }
+		 };
+		 
+		 const fetchDramasFromServer = () => {
+					try {
+						dramas.sort((a, b) => b.voteAverage - a.voteAverage);
+						const dramasToCache = dramas.slice(0, 10);
+						localStorage.setItem("dramasCache", JSON.stringify(dramasToCache));
+						localStorage.setItem("cacheTime", new Date().getTime().toString());
+
+						setDramaCards(
+							dramasToCache.map((element) => (
+								<SwiperSlide key={element.dramaId}>
+									<DramaCard dramaDetails={element} />
+								</SwiperSlide>
+							))
+						);
+					} catch (e) {
+						console.error("Failed to fetch dramas for slider:", e.message);
+					}
+				}
+			fetchAndRenderDramas();
+		}, []);
 
 	return (
 		<>
