@@ -57,7 +57,7 @@ const Home = () => {
 					)}
 				</div>
 			</section>
-			<RandomPick />
+			<RandomPick dramas={homeDramas} />
 			<section className="container wrapper">
 				<DoubleTextContainer title="About Us" text1={text1} text2={text2} />
 			</section>
