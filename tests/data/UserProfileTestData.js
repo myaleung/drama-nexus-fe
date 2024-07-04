@@ -1,4 +1,4 @@
-import { ids } from "./User.testData.js";
+import { ids } from "./UserTestData.js";
 
 export default [
   { company_id: ids[0], role_name: "Test role 1" },
