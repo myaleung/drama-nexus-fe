@@ -11,25 +11,6 @@ import DramaCard from "../components/DramaCard";
 const Slider = ({ dramas }) => {
 	const cacheDuration = 24 * 60 * 60 * 1000; //24hrs in milliseconds
 	const [dramaCards, setDramaCards] = useState([]);
-
-
-	// useEffect(() => {
-	// 	const renderDramas = async () => {
-	// 		try {
-	// 			dramas.sort((a, b) => b.voteAverage - a.voteAverage);
-	// 			setDramaCards(
-	// 				dramas.slice(0, 10).map((element) => (
-	// 					<SwiperSlide key={element.dramaId}>
-	// 						<DramaCard dramaDetails={element} />
-	// 					</SwiperSlide>
-	// 				))
-	// 			);
-	// 		} catch (e) {
-	// 			console.error("Failed to fetch dramas:", e.message);
-	// 		}
-	// 	};
-	// 	renderDramas();
-	// }, []);
 	 useEffect(() => {
 		 const fetchAndRenderDramas = async () => {
 			 const cachedDramas = localStorage.getItem("dramasCache");
